@@ -6,6 +6,10 @@ import client from "../api/client";
 
 import AdminProjectUpload from "../components/AdminProjectUpload";
 import toast from "react-hot-toast";
+import { jwtDecode }
+from "jwt-decode";
+import { useNavigate }
+from "react-router-dom";
 
 export default function AdminPage() {
 
@@ -40,11 +44,59 @@ const [newPrice,
     setComplaintFilter] =
     useState("all");
 
+    const navigate =
+  useNavigate();
+
   useEffect(() => {
 
-    fetchDashboard();
+  const token =
+    localStorage.getItem(
+      "greensolar_token"
+    );
 
-  }, []);
+  if (!token) {
+
+    navigate("/admin-login");
+
+    return;
+  }
+
+  try {
+
+    const decoded =
+      jwtDecode(token);
+
+    const currentTime =
+      Date.now() / 1000;
+
+    if (
+      decoded.exp <
+      currentTime
+    ) {
+
+      localStorage.removeItem(
+        "greensolar_token"
+      );
+
+      navigate("/admin-login");
+
+      return;
+    }
+
+  } catch {
+
+    localStorage.removeItem(
+      "greensolar_token"
+    );
+
+    navigate("/admin-login");
+
+    return;
+  }
+
+  fetchDashboard();
+
+}, []);
 
   async function fetchDashboard() {
 
