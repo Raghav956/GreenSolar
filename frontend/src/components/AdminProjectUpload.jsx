@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import client from "../api/client";
+import toast from "react-hot-toast";
 
 import {
   getCoordinates,
@@ -156,7 +157,7 @@ export default function AdminProjectUpload() {
 
       console.log(error);
 
-      alert(
+      toast.success(
         "Something went wrong"
       );
 

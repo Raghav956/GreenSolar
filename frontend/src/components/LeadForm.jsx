@@ -3,6 +3,7 @@ import { useState } from "react";
 import client from "../api/client";
 
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
 
 export default function LeadForm() {
 
@@ -66,7 +67,7 @@ export default function LeadForm() {
 
     } catch (error) {
 
-      console.log(error);
+      
 
       toast.success(
         "Something went wrong"
