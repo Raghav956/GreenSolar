@@ -1,32 +1,96 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+
 import { motion } from 'framer-motion'
+
 import Navbar from "../components/Navbar";
+
 import Footer from "../components/Footer";
+
+import client from "../api/client";
 
 export default function Calculator() {
 
   const [kw, setKw] = useState(1)
-  const [brand, setBrand] = useState('Tata Power Solar')
-  const [systemType, setSystemType] = useState('On Grid')
 
-  const pricePerKW = {
-    'Tata Power Solar': 70000,
-    'Adani Solar': 68000,
-    'Waaree': 65000,
-    'Loom Solar': 62000,
+  const [brand, setBrand] =
+    useState('')
+
+  const [systemType,
+    setSystemType] =
+    useState('On Grid')
+
+  const [pricing,
+    setPricing] =
+    useState([])
+
+  useEffect(() => {
+
+    fetchPricing()
+
+  }, [])
+
+  async function fetchPricing() {
+
+    try {
+
+      const response =
+        await client.get(
+          "/pricing/"
+        )
+
+      setPricing(
+        response.data
+      )
+
+      /* DEFAULT BRAND */
+
+      if (
+        response.data.length > 0
+      ) {
+
+        setBrand(
+          response.data[0].brand
+        )
+      }
+
+    } catch (error) {
+
+      console.log(error)
+    }
   }
 
-  const totalCost = kw * pricePerKW[brand]
+  /* FIND SELECTED BRAND */
+
+  const selectedBrand =
+    pricing.find(
+
+      (item) =>
+        item.brand === brand
+    )
+
+  /* DYNAMIC PRICE */
+
+  const totalCost =
+
+    kw *
+
+    (
+      selectedBrand
+        ?.price_per_kw || 0
+    )
 
   const subsidy = kw <= 3
     ? totalCost * 0.4
     : totalCost * 0.2
 
-  const finalCost = totalCost - subsidy
+  const finalCost =
+    totalCost - subsidy
 
-  const emi = Math.round(finalCost / 60)
+  const emi =
+    Math.round(finalCost / 60)
 
-  const yearlySavings = kw * 18000
+  const yearlySavings =
+    kw * 18000
 
   return (
 
@@ -76,7 +140,13 @@ export default function Calculator() {
                   min='1'
                   max='1000'
                   value={kw}
-                  onChange={(e) => setKw(Number(e.target.value))}
+                  onChange={(e) =>
+                    setKw(
+                      Number(
+                        e.target.value
+                      )
+                    )
+                  }
                   className='w-full mt-6'
                 />
 
@@ -96,14 +166,27 @@ export default function Calculator() {
 
                 <select
                   value={brand}
-                  onChange={(e) => setBrand(e.target.value)}
+                  onChange={(e) =>
+                    setBrand(
+                      e.target.value
+                    )
+                  }
                   className='w-full mt-4 p-4 rounded-2xl bg-black/40 border border-white/10'
                 >
 
-                  <option>Tata Power Solar</option>
-                  <option>Adani Solar</option>
-                  <option>Waaree</option>
-                  <option>Loom Solar</option>
+                  {pricing.map(
+                    (item) => (
+
+                      <option
+                        key={item.id}
+                        value={item.brand}
+                      >
+
+                        {item.brand}
+
+                      </option>
+                    )
+                  )}
 
                 </select>
 
@@ -119,12 +202,21 @@ export default function Calculator() {
 
                 <select
                   value={systemType}
-                  onChange={(e) => setSystemType(e.target.value)}
+                  onChange={(e) =>
+                    setSystemType(
+                      e.target.value
+                    )
+                  }
                   className='w-full mt-4 p-4 rounded-2xl bg-black/40 border border-white/10'
                 >
 
-                  <option>On Grid</option>
-                  <option>Off Grid</option>
+                  <option>
+                    On Grid
+                  </option>
+
+                  <option>
+                    Off Grid
+                  </option>
 
                 </select>
 
@@ -226,8 +318,11 @@ export default function Calculator() {
         </motion.div>
 
       </div>
+
       <div className="h-32 bg-black" />
-<Footer />
+
+      <Footer />
+
     </div>
 
   )

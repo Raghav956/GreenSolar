@@ -18,6 +18,21 @@ export default function AdminPage() {
   const [complaints, setComplaints] =
     useState([]);
 
+  const [pricing, setPricing] =
+  useState([]);
+
+  const [showPricingModal,
+  setShowPricingModal] =
+  useState(false);
+
+const [newBrand,
+  setNewBrand] =
+  useState("");
+
+const [newPrice,
+  setNewPrice] =
+  useState("");
+
   const [leadFilter, setLeadFilter] =
     useState("all");
 
@@ -50,6 +65,11 @@ export default function AdminPage() {
           "/complaints/"
         );
 
+        const pricingRes =
+  await client.get(
+    "/pricing/"
+  );
+
       setAnalytics(
         analyticsRes.data
       );
@@ -61,12 +81,134 @@ export default function AdminPage() {
       setComplaints(
         complaintsRes.data
       );
+      setPricing(
+  pricingRes.data
+);
 
     } catch (error) {
 
       console.log(error);
     }
   }
+  async function updatePrice(id) {
+
+  const newPrice =
+    prompt(
+      "Enter new price per KW"
+    );
+
+  if (!newPrice) return;
+
+  try {
+
+    await client.put(
+
+      `/pricing/${id}`,
+
+      {
+        price_per_kw:
+          Number(newPrice),
+      }
+    );
+
+    toast.success(
+      "Price Updated"
+    );
+
+    fetchDashboard();
+
+  } catch (error) {
+
+    console.log(error);
+
+    toast.error(
+      "Failed To Update Price"
+    );
+  }
+}
+async function addBrand() {
+
+  if (
+    !newBrand ||
+    !newPrice
+  ) {
+
+    toast.error(
+      "Fill all fields"
+    );
+
+    return;
+  }
+
+  try {
+
+    await client.post(
+
+      "/pricing/",
+
+      {
+
+        brand: newBrand,
+
+        price_per_kw:
+          Number(newPrice),
+      }
+    );
+
+    toast.success(
+      "Brand Added"
+    );
+
+    setShowPricingModal(
+      false
+    );
+
+    setNewBrand("");
+
+    setNewPrice("");
+
+    fetchDashboard();
+
+  } catch (error) {
+
+    console.log(error);
+
+    toast.error(
+      "Failed To Add Brand"
+    );
+  }
+}
+async function deleteBrand(id) {
+
+  const confirmDelete =
+    window.confirm(
+      "Delete This Brand?"
+    );
+
+  if (!confirmDelete)
+    return;
+
+  try {
+
+    await client.delete(
+      `/pricing/${id}`
+    );
+
+    toast.success(
+      "Brand Deleted"
+    );
+
+    fetchDashboard();
+
+  } catch (error) {
+
+    console.log(error);
+
+    toast.error(
+      "Failed To Delete"
+    );
+  }
+}
 
   return (
 
@@ -167,6 +309,114 @@ export default function AdminPage() {
           </div>
 
         </div>
+
+
+{/* PRICING MANAGEMENT */}
+
+<div className="mt-24">
+
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6">
+
+          <div>
+
+            <h2 className="text-4xl font-bold">
+
+              Pricing Management
+
+            </h2>
+
+            <p className="text-gray-400 mt-2">
+
+              Manage Solar Brand Pricing
+
+            </p>
+
+          </div>
+
+          <button
+
+            onClick={() =>
+              setShowPricingModal(true)
+            }
+
+            className="bg-green-500 hover:bg-green-400 transition text-black px-6 py-4 rounded-2xl font-bold"
+          >
+
+            Add Brand
+
+          </button>
+
+        </div>
+
+        {/* PRICING GRID */}
+
+        <div className="grid md:grid-cols-2 gap-6 mt-10">
+
+          {pricing.map((item) => (
+
+            <div
+
+              key={item.id}
+
+              className="bg-white/10 border border-white/10 p-8 rounded-3xl flex flex-col md:flex-row md:justify-between md:items-center gap-6"
+            >
+
+              <div>
+
+                <h3 className="text-2xl font-bold">
+
+                  {item.brand}
+
+                </h3>
+
+                <p className="mt-3 text-gray-300 text-lg">
+
+                  ₹
+                  {" "}
+                  {item.price_per_kw.toLocaleString()}
+                  {" "}
+                  / KW
+
+                </p>
+
+              </div>
+
+              <div className="flex gap-4">
+
+                <button
+
+                  onClick={() =>
+                    updatePrice(item.id)
+                  }
+
+                  className="bg-green-500 hover:bg-green-400 transition text-black px-6 py-3 rounded-2xl font-bold"
+                >
+
+                  Update
+
+                </button>
+
+                <button
+
+                  onClick={() =>
+                    deleteBrand(item.id)
+                  }
+
+                  className="bg-red-500 hover:bg-red-400 transition text-white px-6 py-3 rounded-2xl font-bold"
+                >
+
+                  Delete
+
+                </button>
+
+              </div>
+
+            </div>
+          ))}
+
+        </div>
+
+      </div>
 
         {/* PROJECT UPLOAD */}
 
@@ -585,8 +835,116 @@ export default function AdminPage() {
 
         </div>
 
-      </div>
+           </div>
+
+      {/* ADD BRAND MODAL */}
+
+      {showPricingModal && (
+
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 px-6">
+
+          <div className="w-full max-w-lg bg-[#111827] border border-white/10 rounded-[35px] p-10">
+
+            <h2 className="text-4xl font-bold">
+
+              Add Solar Brand
+
+            </h2>
+
+            {/* BRAND */}
+
+            <div className="mt-10">
+
+              <label className="text-gray-400">
+
+                Brand Name
+
+              </label>
+
+              <input
+
+                value={newBrand}
+
+                onChange={(e) =>
+                  setNewBrand(
+                    e.target.value
+                  )
+                }
+
+                placeholder="Tata Power Solar"
+
+                className="w-full mt-4 p-4 rounded-2xl bg-black/30 border border-white/10 outline-none"
+              />
+
+            </div>
+
+            {/* PRICE */}
+
+            <div className="mt-8">
+
+              <label className="text-gray-400">
+
+                Price Per KW
+
+              </label>
+
+              <input
+
+                type="number"
+
+                value={newPrice}
+
+                onChange={(e) =>
+                  setNewPrice(
+                    e.target.value
+                  )
+                }
+
+                placeholder="70000"
+
+                className="w-full mt-4 p-4 rounded-2xl bg-black/30 border border-white/10 outline-none"
+              />
+
+            </div>
+
+            {/* ACTIONS */}
+
+            <div className="flex gap-4 mt-10">
+
+              <button
+
+                onClick={() =>
+                  setShowPricingModal(
+                    false
+                  )
+                }
+
+                className="flex-1 py-4 rounded-2xl border border-white/10 hover:bg-white/10 transition"
+              >
+
+                Cancel
+
+              </button>
+
+              <button
+
+                onClick={addBrand}
+
+                className="flex-1 py-4 rounded-2xl bg-green-500 hover:bg-green-400 transition text-black font-bold"
+              >
+
+                Add Brand
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+      )}
 
     </div>
+
   );
 }

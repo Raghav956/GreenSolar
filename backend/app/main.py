@@ -17,6 +17,7 @@ from app.routers.lead_router import (
 from app.routers.complaint_router import (
     router as complaint_router
 )
+from app.routers.pricing_router import router as pricing_router
 app = FastAPI()
 
 app.add_middleware(
@@ -34,6 +35,7 @@ app.include_router(upload_router)
 app.include_router(analytics_router)
 app.include_router(lead_router)
 app.include_router(complaint_router)
+app.include_router(pricing_router)
 @app.get("/")
 
 def home():
