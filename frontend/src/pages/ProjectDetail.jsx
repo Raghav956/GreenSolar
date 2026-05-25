@@ -123,6 +123,7 @@ export default function ProjectDetail() {
               muted
               loop
               playsInline
+              preload="metadata"
               className="absolute inset-0 w-full h-full object-cover"
             />
           )
@@ -188,7 +189,7 @@ export default function ProjectDetail() {
               delay: 0.3,
             }}
 
-            className="flex gap-8 mt-8 text-lg text-gray-200"
+            className="flex flex-wrap gap-8 mt-8 text-lg text-gray-200"
           >
 
             <span>
@@ -197,6 +198,10 @@ export default function ProjectDetail() {
 
             <span>
               {project.location}
+            </span>
+
+            <span>
+              {project.customer_name}
             </span>
 
           </motion.div>
@@ -286,6 +291,26 @@ export default function ProjectDetail() {
 
               <div className="mt-12 space-y-10">
 
+                {/* CUSTOMER */}
+
+                <div>
+
+                  <p className="text-sm text-[#7A7D81]">
+
+                    Customer Name
+
+                  </p>
+
+                  <p className="mt-3 text-2xl font-semibold">
+
+                    {project.customer_name}
+
+                  </p>
+
+                </div>
+
+                {/* TYPE */}
+
                 <div>
 
                   <p className="text-sm text-[#7A7D81]">
@@ -302,6 +327,8 @@ export default function ProjectDetail() {
 
                 </div>
 
+                {/* CAPACITY */}
+
                 <div>
 
                   <p className="text-sm text-[#7A7D81]">
@@ -317,6 +344,8 @@ export default function ProjectDetail() {
                   </p>
 
                 </div>
+
+                {/* LOCATION */}
 
                 <div>
 
@@ -360,7 +389,7 @@ export default function ProjectDetail() {
                     width: "100%",
                     height: "550px",
                   }}
-                  
+
                   center={{
                     lat: Number(
                       project.latitude
@@ -501,6 +530,5 @@ export default function ProjectDetail() {
       <Footer />
 
     </div>
-    
   );
 }

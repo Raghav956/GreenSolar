@@ -29,6 +29,7 @@ export default function Home() {
           muted
           loop
           playsInline
+          preload="metadata"
           className="absolute inset-0 w-full h-full object-cover"
         >
 
@@ -300,11 +301,12 @@ export default function Home() {
     muted
     loop
     playsInline
+    preload="metadata"
     className="absolute inset-0 w-full h-full object-cover"
   >
 
     <source
-      src="https://res.cloudinary.com/dvy9g2nsg/video/upload/v1779662318/solar2_1_x3btyg.mp4"
+      src="https://res.cloudinary.com/dvy9g2nsg/video/upload/f_auto,q_auto/v1779662318/solar2_1_x3btyg.mp4"
       type="video/mp4"
     />
 
@@ -484,6 +486,7 @@ export default function Home() {
   <img
     src="/Solar-Panels-Power-Desktop.avif"
     alt=""
+    preload="metadata"
     className="absolute inset-0 w-full h-full object-cover animate-[slowZoom_12s_ease-in-out_infinite]"
   />
 

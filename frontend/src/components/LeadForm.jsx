@@ -319,7 +319,7 @@ export default function LeadForm() {
             >
 
               <option value="">
-                Property Type
+                Select Property Type
               </option>
 
               <option value="Residential">

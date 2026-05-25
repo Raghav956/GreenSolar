@@ -11,6 +11,7 @@ import AdminLogin from "./pages/AdminLogin";
 import ProjectDetail from "./pages/ProjectDetail";
 import WhatsAppButton from "./components/WhatsAppButton";
 import { Toaster } from "react-hot-toast";
+import ScrollToTop from "./components/ScrollToTop";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -19,7 +20,7 @@ function App() {
   return (
 
     <BrowserRouter>
-
+  <ScrollToTop />
       <Routes>
 
         <Route path="/" element={<Home />} />

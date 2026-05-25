@@ -44,7 +44,7 @@ export default function AdminLogin() {
 
     } catch (error) {
 
-      alert("Invalid Credentials");
+      toast.success("Invalid Credentials");
 
     } finally {
 

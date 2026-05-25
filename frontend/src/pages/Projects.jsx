@@ -15,6 +15,17 @@ export default function Projects() {
   const [projects, setProjects] =
     useState([]);
 
+  const [search, setSearch] =
+    useState("");
+
+  const [typeFilter,
+    setTypeFilter] =
+    useState("all");
+
+  const [capacityFilter,
+    setCapacityFilter] =
+    useState("all");
+
   useEffect(() => {
 
     fetchProjects();
@@ -36,6 +47,93 @@ export default function Projects() {
     }
   }
 
+  /* FILTER PROJECTS */
+
+  const filteredProjects =
+    projects.filter((project) => {
+
+      /* SEARCH */
+
+      const matchesSearch =
+
+        project.title
+          ?.toLowerCase()
+          .includes(
+            search.toLowerCase()
+          )
+
+        ||
+
+        project.location
+          ?.toLowerCase()
+          .includes(
+            search.toLowerCase()
+          )
+
+        ||
+
+        project.customer_name
+          ?.toLowerCase()
+          .includes(
+            search.toLowerCase()
+          );
+
+      /* TYPE */
+
+      const matchesType =
+
+        typeFilter === "all"
+
+          ? true
+
+          : project.project_type ===
+            typeFilter;
+
+      /* CAPACITY */
+
+      let matchesCapacity =
+        true;
+
+      const kw = parseInt(
+        project.capacity
+      );
+
+      if (
+        capacityFilter ===
+        "1-5"
+      ) {
+
+        matchesCapacity =
+          kw <= 5;
+      }
+
+      if (
+        capacityFilter ===
+        "5-10"
+      ) {
+
+        matchesCapacity =
+          kw > 5 &&
+          kw <= 10;
+      }
+
+      if (
+        capacityFilter ===
+        "10+"
+      ) {
+
+        matchesCapacity =
+          kw > 10;
+      }
+
+      return (
+
+        matchesSearch &&
+        matchesType &&
+        matchesCapacity
+      );
+    });
+
   return (
 
     <div className="min-h-screen bg-white text-[#171A20] overflow-hidden">
@@ -53,11 +151,12 @@ export default function Projects() {
           muted
           loop
           playsInline
+          preload="metadata"
           className="absolute inset-0 w-full h-full object-cover"
         >
 
           <source
-            src="https://res.cloudinary.com/dvy9g2nsg/video/upload/v1779662318/solar2_1_x3btyg.mp4"
+            src="https://res.cloudinary.com/dvy9g2nsg/video/upload/f_auto,q_auto/v1779662318/solar2_1_x3btyg.mp4"
             type="video/mp4"
           />
 
@@ -137,9 +236,110 @@ export default function Projects() {
 
       </section>
 
+      {/* FILTERS */}
+
+      <section className="px-6 py-16">
+
+        <div className="max-w-7xl mx-auto">
+
+          <div className="grid md:grid-cols-3 gap-6">
+
+            {/* SEARCH */}
+
+            <input
+
+              type="text"
+
+              placeholder="Search projects, city or customer..."
+
+              value={search}
+
+              onChange={(e) =>
+                setSearch(
+                  e.target.value
+                )
+              }
+
+              className="w-full p-5 rounded-2xl border border-[#E5E5E5] outline-none bg-white"
+            />
+
+            {/* PROJECT TYPE */}
+
+            <select
+
+              value={typeFilter}
+
+              onChange={(e) =>
+                setTypeFilter(
+                  e.target.value
+                )
+              }
+
+              className="w-full p-5 rounded-2xl border border-[#E5E5E5] outline-none bg-white"
+            >
+
+              <option value="all">
+                All Project Types
+              </option>
+
+              <option value="Residential">
+                Residential
+              </option>
+
+              <option value="Commercial">
+                Commercial
+              </option>
+
+              <option value="Industrial">
+                Industrial
+              </option>
+
+            </select>
+
+            {/* KW FILTER */}
+
+            <select
+
+              value={
+                capacityFilter
+              }
+
+              onChange={(e) =>
+                setCapacityFilter(
+                  e.target.value
+                )
+              }
+
+              className="w-full p-5 rounded-2xl border border-[#E5E5E5] outline-none bg-white"
+            >
+
+              <option value="all">
+                All Capacities
+              </option>
+
+              <option value="1-5">
+                1KW - 5KW
+              </option>
+
+              <option value="5-10">
+                5KW - 10KW
+              </option>
+
+              <option value="10+">
+                10KW+
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+      </section>
+
       {/* PROJECTS */}
 
-      <section className="px-6 py-32">
+      <section className="px-6 pb-32">
 
         <div className="max-w-7xl mx-auto">
 
@@ -147,7 +347,7 @@ export default function Projects() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
 
-            {projects.map((project, index) => (
+            {filteredProjects.map((project, index) => (
 
               <motion.div
 

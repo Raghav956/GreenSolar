@@ -129,11 +129,12 @@ export default function ComplaintPage() {
           muted
           loop
           playsInline
+          preload="metadata"
           className="absolute inset-0 w-full h-full object-cover"
         >
 
           <source
-            src="https://res.cloudinary.com/dvy9g2nsg/video/upload/v1779662318/solar2_1_x3btyg.mp4"
+            src="https://res.cloudinary.com/dvy9g2nsg/video/upload/f_auto,q_auto/v1779662318/solar2_1_x3btyg.mp4"
             type="video/mp4"
           />
 
