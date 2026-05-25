@@ -39,7 +39,7 @@ export default function LeadForm() {
         formData
       );
 
-      alert(
+      toast.success(
         "Lead Submitted Successfully"
       );
 
@@ -68,7 +68,7 @@ export default function LeadForm() {
 
       console.log(error);
 
-      alert(
+      toast.success(
         "Something went wrong"
       );
     }

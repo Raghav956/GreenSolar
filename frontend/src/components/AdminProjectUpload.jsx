@@ -125,7 +125,7 @@ export default function AdminProjectUpload() {
         );
       }
 
-      alert(
+      toast.success(
         "Project Uploaded Successfully"
       );
 
