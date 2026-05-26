@@ -51,7 +51,7 @@ const [newPrice,
 
   const token =
     localStorage.getItem(
-      "greensolar_token"
+      "rbsolarcare_token"
     );
 
   if (!token) {
@@ -75,7 +75,7 @@ const [newPrice,
     ) {
 
       localStorage.removeItem(
-        "greensolar_token"
+        "rbsolarcare_token"
       );
 
       navigate("/admin-login");
@@ -86,7 +86,7 @@ const [newPrice,
   } catch {
 
     localStorage.removeItem(
-      "greensolar_token"
+      "rbsolarcare_token"
     );
 
     navigate("/admin-login");
@@ -812,70 +812,154 @@ async function deleteBrand(id) {
 
                     <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6">
 
-                      {/* LEFT */}
+                  {/* LEFT */}
 
-                      <div>
+<div className="flex-1">
 
-                        <h3 className="text-3xl font-bold">
+  {/* TITLE */}
 
-                          {
-                            complaint.complaint_title
-                          }
+  <div className="flex flex-wrap gap-4 items-center">
 
-                        </h3>
+    <h3 className="text-3xl font-bold">
 
-                        <p className="mt-5 text-gray-300 leading-relaxed max-w-4xl">
+      {complaint.complaint_title}
 
-                          {
-                            complaint.complaint_description
-                          }
+    </h3>
 
-                        </p>
+    <div className="px-4 py-2 rounded-full bg-red-500/20 text-red-300 text-sm border border-red-500/20">
 
-                      </div>
+      Complaint ID:
+      {" "}
+      {complaint.id}
 
-                      {/* RIGHT */}
+    </div>
 
-                      <div>
+  </div>
 
-                        <select
+  {/* DESCRIPTION */}
 
-                          value={
-                            complaint.complaint_status
-                          }
+  <p className="mt-5 text-gray-300 leading-relaxed max-w-4xl">
 
-                          onChange={async (e) => {
+    {complaint.complaint_description}
 
-                            await client.put(
+  </p>
 
-                              `/complaints/${complaint.id}/status?status=${e.target.value}`
-                            );
+  {/* DETAILS GRID */}
 
-                            fetchDashboard();
-                          }}
+  <div className="grid md:grid-cols-2 gap-6 mt-8">
 
-                          className="bg-black/30 border border-white/10 rounded-xl px-4 py-3"
-                        >
+    {/* PROJECT ID */}
 
-                          <option value="Pending">
-                            Pending
-                          </option>
+    <div className="bg-black/20 border border-white/10 rounded-2xl p-5">
 
-                          <option value="In Progress">
-                            In Progress
-                          </option>
+      <p className="text-gray-400 text-sm">
 
-                          <option value="Resolved">
-                            Resolved
-                          </option>
+        Project ID
 
-                          <option value="Closed">
-                            Closed
-                          </option>
+      </p>
 
-                        </select>
+      <p className="mt-2 text-lg font-semibold">
 
-                      </div>
+        {complaint.project_id || "-"}
+
+      </p>
+
+    </div>
+
+    {/* CUSTOMER PHONE */}
+
+    <div className="bg-black/20 border border-white/10 rounded-2xl p-5">
+
+      <p className="text-gray-400 text-sm">
+
+        Customer Phone
+
+      </p>
+
+      <p className="mt-2 text-lg font-semibold">
+
+        {complaint.customer_phone || "-"}
+
+      </p>
+
+    </div>
+
+    {/* STATUS */}
+
+    <div className="bg-black/20 border border-white/10 rounded-2xl p-5">
+
+      <p className="text-gray-400 text-sm">
+
+        Current Status
+
+      </p>
+
+      <p className="mt-2 text-lg font-semibold text-cyan-300">
+
+        {complaint.complaint_status}
+
+      </p>
+
+    </div>
+
+    {/* CREATED */}
+
+    <div className="bg-black/20 border border-white/10 rounded-2xl p-5">
+
+      <p className="text-gray-400 text-sm">
+
+        Created At
+
+      </p>
+
+      <p className="mt-2 text-lg font-semibold">
+
+        {
+
+          complaint.created_at
+
+            ? new Date(
+                complaint.created_at
+              ).toLocaleString()
+
+            : "-"
+        }
+
+      </p>
+
+    </div>
+
+  </div>
+
+  {/* MEDIA */}
+
+  {complaint.media_url && (
+
+    <div className="mt-8">
+
+      <p className="text-gray-400 mb-4">
+
+        Attached Media
+
+      </p>
+
+      <a
+
+        href={complaint.media_url}
+
+        target="_blank"
+
+        className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 transition border border-white/10"
+      >
+
+        View Attachment
+
+      </a>
+
+    </div>
+  )}
+
+</div>
 
                     </div>
 

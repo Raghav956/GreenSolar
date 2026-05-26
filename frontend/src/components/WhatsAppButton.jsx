@@ -8,7 +8,7 @@ export default function WhatsAppButton() {
 
     <a
 
-      href={`https://wa.me/${phone}?text=Hi GreenSolar, I want solar installation details.`}
+      href={`https://wa.me/${phone}?text=Hi RB Solar Care, I want solar installation details.`}
 
       target="_blank"
 
@@ -30,7 +30,7 @@ export default function WhatsAppButton() {
 
       <div className="absolute right-20 bottom-4 bg-black text-white text-sm px-4 py-2 rounded-full opacity-0 group-hover:opacity-100 transition duration-300 whitespace-nowrap">
 
-        Chat With GreenSolar
+        Chat With RB Solar Care
 
       </div>
 

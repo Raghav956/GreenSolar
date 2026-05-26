@@ -36,7 +36,7 @@ export default function AdminLogin() {
         await loginAdmin(formData);
 
       localStorage.setItem(
-        "greensolar_token",
+        "rbsolarcare_token",
         response.access_token
       );
 

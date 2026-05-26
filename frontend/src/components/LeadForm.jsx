@@ -100,7 +100,7 @@ export default function LeadForm() {
 
           <p className="uppercase tracking-[6px] text-[#7A7D81] text-sm">
 
-            GreenSolar Consultation
+            RB Solar Care Consultation
 
           </p>
 
@@ -113,7 +113,7 @@ export default function LeadForm() {
           <p className="mt-8 text-xl text-[#5C5E62] max-w-4xl mx-auto leading-relaxed">
 
             Share your electricity usage and rooftop details.
-            GreenSolar will help you estimate system size,
+            RB Solar Care will help you estimate system size,
             subsidy eligibility and expected savings.
 
           </p>

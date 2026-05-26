@@ -4,7 +4,7 @@ from jose import jwt
 
 from passlib.context import CryptContext
 
-SECRET_KEY = "greensolar_super_secret_key"
+SECRET_KEY = "rbsolarcare_super_secret_key"
 
 ALGORITHM = "HS256"
 

@@ -69,7 +69,7 @@ export default function Contact() {
             className="uppercase tracking-[8px] text-white text-sm"
           >
 
-            GreenSolar Consultation
+            RB Solar Care Consultation
 
           </motion.p>
 
@@ -156,21 +156,42 @@ export default function Contact() {
 
               </h2>
 
-              <div className="mt-8 space-y-4 text-lg text-[#5C5E62]">
+             <div className="mt-8 flex flex-col gap-4 text-lg">
 
-                <p>
-                  +91 75248 53717
-                </p>
+  <a
 
-                <p>
-                  +91 95808 21649
-                </p>
+    href="tel:+917524853717"
 
-                <p>
-                  +91 93070 19423
-                </p>
+    className="text-[#5C5E62] hover:text-black transition"
+  >
 
-              </div>
+    +91 75248 53717
+
+  </a>
+
+  <a
+
+    href="tel:+919580821649"
+
+    className="text-[#5C5E62] hover:text-black transition"
+  >
+
+    +91 95808 21649
+
+  </a>
+
+  <a
+
+    href="tel:+919307019423"
+
+    className="text-[#5C5E62] hover:text-black transition"
+  >
+
+    +91 93070 19423
+
+  </a>
+
+</div>
 
             </motion.div>
 
@@ -213,7 +234,7 @@ export default function Contact() {
 
               <p className="mt-8 text-lg leading-relaxed opacity-90">
 
-                Chat directly with GreenSolar for pricing,
+                Chat directly with RB Solar Care for pricing,
                 subsidy support and rooftop consultation.
 
               </p>
@@ -254,7 +275,7 @@ export default function Contact() {
 
               <p className="mt-8 text-lg text-[#5C5E62] leading-relaxed">
 
-                GreenSolar Headquarters
+                RB Solar Care Headquarters
                 <br />
 
                 Kanpur, Uttar Pradesh
@@ -299,7 +320,7 @@ export default function Contact() {
 
       <p className="uppercase tracking-[6px] text-[#7A7D81] text-sm">
 
-        GreenSolar Energy
+        RB Solar Care Energy
 
       </p>
 
@@ -315,7 +336,7 @@ export default function Contact() {
       <p className="mt-10 text-xl text-[#5C5E62] leading-relaxed max-w-2xl">
 
         From consultation to subsidy processing —
-        GreenSolar handles everything end-to-end
+        RB Solar Care handles everything end-to-end
         with premium solar infrastructure,
         rooftop engineering and long-term support.
 

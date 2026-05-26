@@ -8,7 +8,7 @@ export default function ProtectedRoute({
 
   const token =
     localStorage.getItem(
-      "greensolar_token"
+      "rbSOLARCARE_token"
     );
 
   if (!token) {

@@ -60,17 +60,37 @@ export default function Navbar() {
 
           <Link to="/">
 
-            <h1 className="text-xl md:text-2xl font-bold tracking-wide text-white">
+  <div className="flex items-center gap-2">
 
-              <span className="text-cyan-400">
-                Green
-              </span>
+    {/* RB */}
 
-              Solar
+    <div className="w-10 h-10 rounded-full bg-cyan-400 flex items-center justify-center text-black font-black text-lg shadow-lg">
 
-            </h1>
+      RB
 
-          </Link>
+    </div>
+
+    {/* TEXT */}
+
+    <div className="leading-tight">
+
+      <h1 className="text-xl md:text-2xl font-bold tracking-wide text-white">
+
+        Solar Care
+
+      </h1>
+
+      <p className="text-[10px] md:text-xs text-cyan-300 tracking-[3px] uppercase">
+
+        Renewable Energy
+
+      </p>
+
+    </div>
+
+  </div>
+
+</Link>
 
           {/* DESKTOP MENU */}
 

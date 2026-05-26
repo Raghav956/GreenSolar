@@ -16,11 +16,35 @@ export default function Footer() {
 
           <div>
 
-            <h2 className="text-5xl font-bold">
+            <div className="flex items-center gap-4">
 
-              GreenSolar
+  {/* LOGO */}
 
-            </h2>
+  <div className="w-16 h-16 rounded-full bg-cyan-400 flex items-center justify-center text-black font-black text-2xl shadow-2xl">
+
+    RB
+
+  </div>
+
+  {/* TEXT */}
+
+  <div>
+
+    <h2 className="text-4xl md:text-5xl font-bold leading-tight">
+
+      Solar Care
+
+    </h2>
+
+    <p className="text-cyan-300 uppercase tracking-[4px] text-xs mt-2">
+
+      Renewable Energy
+
+    </p>
+
+  </div>
+
+</div>
 
             <p className="mt-8 text-gray-400 text-lg leading-relaxed max-w-md">
 
@@ -35,7 +59,7 @@ export default function Footer() {
 
               <button className="mt-10 px-8 py-4 rounded-full bg-white text-[#171A20] font-semibold hover:bg-gray-200 transition duration-300">
 
-                Contact GreenSolar
+                Contact RB Solar Care
 
               </button>
 
@@ -116,25 +140,30 @@ export default function Footer() {
 
       </p>
 
-      <p>
-        +91 75248 53717
-      </p>
+     <div className="flex flex-col gap-2">
+
+  <a
+    href="tel:+917524853717"
+    className="hover:text-white transition"
+  >
+
+    +91 75248 53717
+
+  </a>
+
+  <a
+    href="tel:+919580821649"
+    className="hover:text-white transition"
+  >
+
+    +91 95808 21649
+
+  </a>
+
+</div>
 
     </div>
 
-    <div>
-
-      <p className="text-white font-medium">
-
-        Rohit Kalsi
-
-      </p>
-
-      <p>
-        +91 95808 21649
-      </p>
-
-    </div>
 
     <div>
 
@@ -144,9 +173,14 @@ export default function Footer() {
 
       </p>
 
-      <p>
-        +91 93070 19423
-      </p>
+     <a
+  href="tel:+919307019423"
+  className="hover:text-white transition"
+>
+
+  +91 93070 19423
+
+</a>
 
     </div>
 
@@ -156,9 +190,14 @@ export default function Footer() {
         Kanpur, Uttar Pradesh
       </p>
 
-      <p>
-        support@greensolar.in
-      </p>
+      <a
+  href="mailto:support@rbsolarcare.in"
+  className="hover:text-white transition"
+>
+
+  support@rbsolarcare.in
+
+</a>
 
     </div>
 
@@ -178,7 +217,7 @@ export default function Footer() {
 
           <p className="text-gray-500 text-sm">
 
-            © 2026 GreenSolar. All rights reserved.
+            © 2026 RB Solar Care. All rights reserved.
 
           </p>
 
