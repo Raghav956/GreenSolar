@@ -209,7 +209,7 @@ export default function Home() {
             className="mt-10 text-xl text-[#5C5E62] max-w-5xl leading-relaxed"
           >
 
-            Generate clean energy directly from the sun with GreenSolar installations.
+            Generate clean energy directly from the sun with RB Solar Care installations.
             Reduce your electricity expenses while increasing long-term energy independence.
 
           </motion.p>
@@ -356,7 +356,7 @@ export default function Home() {
           >
 
             From homes to industrial facilities —
-            GreenSolar delivers reliable solar infrastructure across Uttar Pradesh.
+            RB Solar Care delivers reliable solar infrastructure across Uttar Pradesh.
 
           </motion.p>
 
@@ -539,7 +539,7 @@ export default function Home() {
     >
 
       From inspection to subsidy processing —
-      GreenSolar handles everything under one roof.
+      RB Solar Care handles everything under one roof.
 
     </motion.p>
 
@@ -566,7 +566,7 @@ export default function Home() {
 
         <button className="px-10 py-4 rounded-full bg-white text-[#171A20] font-semibold hover:bg-gray-200 transition duration-300">
 
-          Contact GreenSolar
+          Contact RB Solar Care
 
         </button>
 

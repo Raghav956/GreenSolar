@@ -185,7 +185,7 @@ export default function Projects() {
             className="uppercase tracking-[8px] text-white text-sm"
           >
 
-            GreenSolar Projects
+            RB Solar Care Projects
 
           </motion.p>
 

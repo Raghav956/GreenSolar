@@ -163,7 +163,7 @@ export default function ComplaintPage() {
             className="uppercase tracking-[8px] text-white text-sm"
           >
 
-            GreenSolar Support
+            RB Solar Care Support
 
           </motion.p>
 
@@ -206,7 +206,7 @@ export default function ComplaintPage() {
             className="mt-8 text-xl text-gray-200 max-w-4xl leading-relaxed"
           >
 
-            Raise support requests and service complaints for your GreenSolar installation.
+            Raise support requests and service complaints for your RB Solar Care installation.
 
           </motion.p>
 

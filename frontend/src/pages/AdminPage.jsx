@@ -278,7 +278,7 @@ async function deleteBrand(id) {
 
             <p className="uppercase tracking-[6px] text-gray-400 text-sm">
 
-              GreenSolar Administration
+              RB Solar Care Administration
 
             </p>
 

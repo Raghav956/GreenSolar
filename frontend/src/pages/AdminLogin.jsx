@@ -85,7 +85,7 @@ export default function AdminLogin() {
 
           <p className="text-gray-400 text-center mt-6">
 
-            Secure access to GreenSolar dashboard.
+            Secure access to RB Solar Care dashboard.
 
           </p>
 

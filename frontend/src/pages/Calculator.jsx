@@ -299,7 +299,7 @@ export default function Calculator() {
               {/* CTA */}
 
               <a
-                href='https://wa.me/917524853717?text=Hi GreenSolar, I want solar consultation.'
+                href='https://wa.me/917524853717?text=Hi RB Solar Care, I want solar consultation.'
                 target='_blank'
               >
 

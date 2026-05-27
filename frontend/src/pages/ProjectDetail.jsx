@@ -493,7 +493,7 @@ export default function ProjectDetail() {
 
             <p className="mt-8 text-xl text-[#5C5E62] max-w-3xl mx-auto">
 
-              Get subsidy assistance, installation support and a complete solar consultation from GreenSolar.
+              Get subsidy assistance, installation support and a complete solar consultation from RB Solar Care.
 
             </p>
 
@@ -503,7 +503,7 @@ export default function ProjectDetail() {
 
                 <button className="px-10 py-4 rounded-full bg-[#171A20] text-white font-semibold hover:opacity-90 transition duration-300">
 
-                  Contact GreenSolar
+                  Contact RB Solar Care
 
                 </button>
 

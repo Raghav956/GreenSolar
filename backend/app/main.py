@@ -41,5 +41,5 @@ app.include_router(pricing_router)
 def home():
 
     return {
-        "message": "GreenSolar Backend Running"
+        "message": "RB Solar Care Backend Running"
     }
