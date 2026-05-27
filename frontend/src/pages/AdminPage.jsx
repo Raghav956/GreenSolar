@@ -56,7 +56,7 @@ const [newPrice,
 
   if (!token) {
 
-    navigate("/admin-login");
+    navigate("/admin/login");
 
     return;
   }
@@ -78,7 +78,7 @@ const [newPrice,
         "rbsolarcare_token"
       );
 
-      navigate("/admin-login");
+      navigate("/admin/login");
 
       return;
     }
@@ -89,7 +89,7 @@ const [newPrice,
       "rbsolarcare_token"
     );
 
-    navigate("/admin-login");
+    navigate("/admin/login");
 
     return;
   }
