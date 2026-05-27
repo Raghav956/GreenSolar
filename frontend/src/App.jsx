@@ -14,6 +14,7 @@ import { Toaster } from "react-hot-toast";
 import ScrollToTop from "./components/ScrollToTop";
 
 import ProtectedRoute from "./components/ProtectedRoute";
+import NotFound from "./pages/NotFound";
 
 function App() {
 
@@ -69,6 +70,10 @@ function App() {
           path="/calculator"
           element={<Calculator />}
         />
+        <Route
+  path="*"
+  element={<NotFound />}
+/>
 
       </Routes>
       
