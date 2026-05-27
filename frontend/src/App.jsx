@@ -1,4 +1,9 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 
 import Home from "./pages/Home";
 import ComplaintPage from "./pages/ComplaintPage";
@@ -15,13 +20,26 @@ import ScrollToTop from "./components/ScrollToTop";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
+function AppContent() {
 
-function App() {
+  const location = useLocation();
+
+  const hideWhatsApp = [
+
+    "/contact",
+
+    "/admin",
+
+    "/admin/login",
+
+  ].includes(location.pathname);
 
   return (
 
-    <BrowserRouter>
-  <ScrollToTop />
+    <>
+
+      <ScrollToTop />
+
       <Routes>
 
         <Route path="/" element={<Home />} />
@@ -31,30 +49,29 @@ function App() {
           element={<ComplaintPage />}
         />
 
-      <Route
-  path="/admin"
-  element={
-    <ProtectedRoute>
-
-      <AdminPage />
-
-    </ProtectedRoute>
-  }
-/>
-
-<Route
-  path="/admin/login"
-  element={<AdminLogin />}
-/>
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminPage />
+            </ProtectedRoute>
+          }
+        />
 
         <Route
-  path="/projects"
-  element={<Projects />}
-/>
-<Route
-  path="/projects/:id"
-  element={<ProjectDetail />}
-/>
+          path="/admin/login"
+          element={<AdminLogin />}
+        />
+
+        <Route
+          path="/projects"
+          element={<Projects />}
+        />
+
+        <Route
+          path="/projects/:id"
+          element={<ProjectDetail />}
+        />
 
         <Route
           path="/contact"
@@ -70,17 +87,30 @@ function App() {
           path="/calculator"
           element={<Calculator />}
         />
+
         <Route
-  path="*"
-  element={<NotFound />}
-/>
+          path="*"
+          element={<NotFound />}
+        />
 
       </Routes>
-      
-  <WhatsAppButton />
-  <Toaster
-  position="top-right"
-/>
+
+      {!hideWhatsApp && <WhatsAppButton />}
+
+      <Toaster position="top-right" />
+
+    </>
+
+  );
+}
+function App() {
+
+   return (
+
+    <BrowserRouter>
+
+      <AppContent />
+
     </BrowserRouter>
   );
 }
