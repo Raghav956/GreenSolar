@@ -112,7 +112,7 @@ export default function Contact() {
             className="mt-8 text-xl text-gray-200 max-w-4xl leading-relaxed"
           >
 
-            Get subsidy support, rooftop inspection and complete solar consultation from GreenSolar.
+            Get subsidy support, rooftop inspection and complete solar consultation from RB Solar Care.
 
           </motion.p>
 
