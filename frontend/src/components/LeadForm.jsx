@@ -148,7 +148,7 @@ export default function LeadForm() {
             {/* NAME */}
 
             <input
-
+              required
               value={formData.full_name}
 
               placeholder="Full Name"
@@ -169,7 +169,9 @@ export default function LeadForm() {
             {/* PHONE */}
 
             <input
-
+              required
+              type="tel"
+              pattern="[0-9]{10}"
               value={formData.phone_number}
 
               placeholder="Phone Number"
@@ -190,7 +192,7 @@ export default function LeadForm() {
             {/* CITY */}
 
             <input
-
+              required
               value={formData.city}
 
               placeholder="City"
@@ -211,7 +213,8 @@ export default function LeadForm() {
             {/* ELECTRICITY BILL */}
 
             <input
-
+              required
+              type="number"
               value={formData.electricity_bill}
 
               placeholder="Monthly Electricity Bill"
@@ -232,7 +235,7 @@ export default function LeadForm() {
             {/* ROOF TYPE */}
 
             <select
-
+              required
               value={formData.roof_type}
 
               className="p-5 rounded-2xl bg-white border border-[#E5E5E5] outline-none text-[#171A20]"
@@ -281,7 +284,8 @@ export default function LeadForm() {
             {/* REQUIRED KW */}
 
             <input
-
+              required
+              type="number"
               value={formData.required_kw}
 
               placeholder="Required KW"
@@ -302,7 +306,7 @@ export default function LeadForm() {
             {/* PROPERTY TYPE */}
 
             <select
-
+              required
               value={formData.property_type}
 
               className="p-5 rounded-2xl bg-white border border-[#E5E5E5] outline-none text-[#171A20]"
@@ -343,7 +347,7 @@ export default function LeadForm() {
             {/* SUBSIDY */}
 
             <select
-
+              required
               className="p-5 rounded-2xl bg-white border border-[#E5E5E5] outline-none text-[#171A20]"
 
               onChange={(e) =>
@@ -373,7 +377,7 @@ export default function LeadForm() {
           {/* MESSAGE */}
 
           <textarea
-
+            
             value={formData.message}
 
             placeholder="Additional Requirements"
