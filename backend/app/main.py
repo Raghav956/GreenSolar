@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -20,9 +22,20 @@ from app.routers.complaint_router import (
 from app.routers.pricing_router import router as pricing_router
 app = FastAPI()
 
+frontend_origins = os.getenv(
+    "FRONTEND_ORIGINS",
+    "https://rbsolarcare.in,https://www.rbsolarcare.in,http://localhost:5173"
+)
+
+allowed_origins = [
+    origin.strip()
+    for origin in frontend_origins.split(",")
+    if origin.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -42,4 +55,12 @@ def home():
 
     return {
         "message": "GreenSolar Backend Running"
+    }
+
+@app.options("/{full_path:path}")
+
+def preflight_handler(full_path: str):
+
+    return {
+        "message": "OK"
     }
