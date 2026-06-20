@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 
 import { loginAdmin } from "../services/authService";
+import { AUTH_TOKEN_KEY } from "../api/client";
 import toast from "react-hot-toast";
 
 export default function AdminLogin() {
@@ -36,7 +37,7 @@ export default function AdminLogin() {
         await loginAdmin(formData);
 
       localStorage.setItem(
-        "rbsolarcare_token",
+        AUTH_TOKEN_KEY,
         response.access_token
       );
 

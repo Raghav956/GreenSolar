@@ -5,6 +5,7 @@ from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
 from app.db.dependencies import get_db
+from app.core.security import get_current_admin
 
 from app.models.lead_model import Lead
 
@@ -62,7 +63,8 @@ def create_lead(
 @router.get("/")
 
 def get_leads(
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    _admin = Depends(get_current_admin)
 ):
 
     leads = db.query(Lead).all()
@@ -75,7 +77,8 @@ def get_leads(
 
 def get_lead(
     lead_id: int,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    _admin = Depends(get_current_admin)
 ):
 
     lead = db.query(Lead).filter(
@@ -98,7 +101,8 @@ def get_lead(
 def update_lead_status(
     lead_id: int,
     status: str,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    _admin = Depends(get_current_admin)
 ):
 
     lead = db.query(Lead).filter(
@@ -124,7 +128,8 @@ def update_lead_status(
 
 def delete_lead(
     lead_id: int,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    _admin = Depends(get_current_admin)
 ):
 
     lead = db.query(Lead).filter(
@@ -141,7 +146,6 @@ def delete_lead(
     db.delete(lead)
 
     db.commit()
-    db.refresh(lead)
 
     return {
         "message": "Lead Deleted Successfully"

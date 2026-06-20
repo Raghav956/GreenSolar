@@ -68,14 +68,6 @@ export default function Projects() {
           ?.toLowerCase()
           .includes(
             search.toLowerCase()
-          )
-
-        ||
-
-        project.customer_name
-          ?.toLowerCase()
-          .includes(
-            search.toLowerCase()
           );
 
       /* TYPE */
@@ -250,7 +242,7 @@ export default function Projects() {
 
               type="text"
 
-              placeholder="Search projects, city or customer..."
+              placeholder="Search projects or city..."
 
               value={search}
 

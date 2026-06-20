@@ -5,6 +5,7 @@ from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
 from app.db.dependencies import get_db
+from app.core.security import get_current_admin
 
 from app.models.pricing_model import Pricing
 
@@ -26,7 +27,9 @@ def create_pricing(
 
     data: PricingCreateSchema,
 
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+
+    _admin = Depends(get_current_admin)
 ):
 
     pricing = Pricing(
@@ -70,7 +73,9 @@ def update_pricing(
 
     data: PricingUpdateSchema,
 
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+
+    _admin = Depends(get_current_admin)
 ):
 
     pricing = db.query(
@@ -109,7 +114,9 @@ def delete_pricing(
 
     pricing_id: int,
 
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+
+    _admin = Depends(get_current_admin)
 ):
 
     pricing = db.query(

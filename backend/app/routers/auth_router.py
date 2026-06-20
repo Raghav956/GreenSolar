@@ -1,6 +1,9 @@
 from fastapi import APIRouter
 from fastapi import Depends
+from fastapi import Header
 from fastapi import HTTPException
+import os
+import secrets
 
 from sqlalchemy.orm import Session
 
@@ -25,8 +28,19 @@ router = APIRouter(
 
 def register(
     data: LoginSchema,
+    setup_key: str = Header(alias="X-Admin-Setup-Key"),
     db: Session = Depends(get_db)
 ):
+    expected_setup_key = os.getenv("ADMIN_SETUP_KEY")
+
+    if (
+        not expected_setup_key
+        or not secrets.compare_digest(setup_key, expected_setup_key)
+    ):
+        raise HTTPException(
+            status_code=403,
+            detail="Invalid admin setup key"
+        )
 
     existing_user = db.query(User).filter(
         User.email == data.email

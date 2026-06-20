@@ -1,4 +1,9 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 
 import Home from "./pages/Home";
 import ComplaintPage from "./pages/ComplaintPage";
@@ -9,11 +14,28 @@ import Calculator from "./pages/Calculator";
 import Projects from "./pages/Projects";
 import AdminLogin from "./pages/AdminLogin";
 import ProjectDetail from "./pages/ProjectDetail";
+import NotFound from "./pages/NotFound";
 import WhatsAppButton from "./components/WhatsAppButton";
 import { Toaster } from "react-hot-toast";
 import ScrollToTop from "./components/ScrollToTop";
 
 import ProtectedRoute from "./components/ProtectedRoute";
+
+function ConditionalWhatsAppButton() {
+
+  const location = useLocation();
+
+  if (
+    location.pathname.startsWith(
+      "/admin"
+    )
+  ) {
+
+    return null;
+  }
+
+  return <WhatsAppButton />;
+}
 
 function App() {
 
@@ -70,9 +92,11 @@ function App() {
           element={<Calculator />}
         />
 
+        <Route path="*" element={<NotFound />} />
+
       </Routes>
       
-  <WhatsAppButton />
+  <ConditionalWhatsAppButton />
   <Toaster
   position="top-right"
 />

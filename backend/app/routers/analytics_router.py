@@ -4,6 +4,7 @@ from fastapi import Depends
 from sqlalchemy.orm import Session
 
 from app.db.dependencies import get_db
+from app.core.security import get_current_admin
 
 from app.models.analytics_model import AnalyticsEvent
 
@@ -47,7 +48,8 @@ def create_event(
 @router.get("/")
 
 def get_events(
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    _admin = Depends(get_current_admin)
 ):
 
     events = db.query(
@@ -61,7 +63,8 @@ def get_events(
 @router.get("/summary")
 
 def analytics_summary(
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    _admin = Depends(get_current_admin)
 ):
 
     total_events = db.query(

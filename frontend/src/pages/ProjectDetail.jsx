@@ -200,10 +200,6 @@ export default function ProjectDetail() {
               {project.location}
             </span>
 
-            <span>
-              {project.customer_name}
-            </span>
-
           </motion.div>
 
         </div>
@@ -290,24 +286,6 @@ export default function ProjectDetail() {
               </h3>
 
               <div className="mt-12 space-y-10">
-
-                {/* CUSTOMER */}
-
-                <div>
-
-                  <p className="text-sm text-[#7A7D81]">
-
-                    Customer Name
-
-                  </p>
-
-                  <p className="mt-3 text-2xl font-semibold">
-
-                    {project.customer_name}
-
-                  </p>
-
-                </div>
 
                 {/* TYPE */}
 

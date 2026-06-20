@@ -5,6 +5,7 @@ from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
 from app.db.dependencies import get_db
+from app.core.security import get_current_admin
 
 from app.models.project_model import Project
 from app.models.complaint_model import Complaint
@@ -40,8 +41,7 @@ def customer_login(
 
     return {
         "message": "Customer Verified",
-        "project_id": project.id,
-        "customer_name": project.customer_name
+        "project_id": project.id
     }
 
 # CREATE COMPLAINT
@@ -93,7 +93,8 @@ def create_complaint(
 @router.get("/")
 
 def get_complaints(
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    _admin = Depends(get_current_admin)
 ):
 
     complaints = db.query(
@@ -109,7 +110,8 @@ def get_complaints(
 def update_status(
     complaint_id: int,
     status: str,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    _admin = Depends(get_current_admin)
 ):
 
     complaint = db.query(Complaint).filter(

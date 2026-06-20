@@ -1,4 +1,5 @@
 import { Navigate } from "react-router-dom";
+import { AUTH_TOKEN_KEY } from "../api/client";
 
 export default function ProtectedRoute({
 
@@ -8,7 +9,7 @@ export default function ProtectedRoute({
 
   const token =
     localStorage.getItem(
-      "rbSOLARCARE_token"
+      AUTH_TOKEN_KEY
     );
 
   if (!token) {
