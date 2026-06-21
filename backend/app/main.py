@@ -1,6 +1,7 @@
 import os
 
 from fastapi import FastAPI
+from fastapi import Response
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.routers.auth_router import router as auth_router
@@ -41,6 +42,45 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.middleware("http")
+async def handle_cors_preflight(
+    request,
+    call_next
+):
+    origin = request.headers.get("origin")
+
+    if (
+        request.method == "OPTIONS"
+        and origin
+    ):
+        response = Response(status_code=204)
+
+        if origin in allowed_origins:
+            response.headers[
+                "Access-Control-Allow-Origin"
+            ] = origin
+            response.headers[
+                "Access-Control-Allow-Credentials"
+            ] = "true"
+
+        response.headers[
+            "Access-Control-Allow-Methods"
+        ] = "GET, POST, PUT, DELETE, OPTIONS"
+        response.headers[
+            "Access-Control-Allow-Headers"
+        ] = request.headers.get(
+            "access-control-request-headers",
+            "Authorization, Content-Type"
+        )
+        response.headers[
+            "Access-Control-Max-Age"
+        ] = "86400"
+        response.headers["Vary"] = "Origin"
+
+        return response
+
+    return await call_next(request)
+
 app.include_router(auth_router)
 
 app.include_router(project_router)
@@ -55,12 +95,4 @@ def home():
 
     return {
         "message": "GreenSolar Backend Running"
-    }
-
-@app.options("/{full_path:path}")
-
-def preflight_handler(full_path: str):
-
-    return {
-        "message": "OK"
     }
